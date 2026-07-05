@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SepsisSense | About</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<style>
+
+body{
+font-family:'Inter',sans-serif;
+background:#f8f7ff;
+margin:0;
+}
+
+nav{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:22px 7%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:white;
+box-shadow:0 2px 20px rgba(0,0,0,.05);
+z-index:1000;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:32px;
+font-weight:800;
+}
+
+.logo i{
+color:#7C3AED;
+}
+
+nav ul{
+display:flex;
+gap:40px;
+list-style:none;
+}
+
+nav a{
+text-decoration:none;
+color:#374151;
+font-weight:600;
+}
+
+.about{
+padding:140px 8% 70px;
+}
+
+.hero{
+text-align:center;
+margin-bottom:60px;
+}
+
+.hero h1{
+font-size:52px;
+margin-bottom:15px;
+}
+
+.hero p{
+font-size:20px;
+color:#64748B;
+max-width:800px;
+margin:auto;
+line-height:1.8;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+margin-top:40px;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 15px 40px rgba(0,0,0,.08);
+}
+
+.card i{
+font-size:40px;
+color:#7C3AED;
+margin-bottom:15px;
+}
+
+.section-title{
+text-align:center;
+margin-top:70px;
+font-size:36px;
+}
+
+.warning{
+margin-top:45px;
+background:#FEF3C7;
+padding:25px;
+border-left:6px solid orange;
+border-radius:12px;
+}
+
+.dev{
+margin-top:50px;
+background:white;
+padding:35px;
+border-radius:20px;
+box-shadow:0 15px 35px rgba(0,0,0,.08);
+text-align:center;
+line-height:2;
+}
+
+footer{
+margin-top:60px;
+text-align:center;
+padding:25px;
+color:#64748B;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+<i class="fa-solid fa-heart-pulse"></i>
+<span>SepsisSense</span>
+</div>
+
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/predict">Prediction</a></li>
+<li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+
+<section class="about">
+
+<div class="hero">
+<h1>About SepsisSense</h1>
+
+<p>
+SepsisSense is an AI-powered clinical decision support application
+that predicts the risk of sepsis using machine learning based on
+20 clinical features including vital signs and laboratory parameters.
+</p>
+
+</div>
+
+<h2 class="section-title">Project Highlights</h2>
+
+<div class="grid">
+
+<div class="card">
+<i class="fa-solid fa-brain"></i>
+<h3>Machine Learning</h3>
+<p>Logistic Regression trained on the PhysioNet Sepsis Dataset.</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-heart-pulse"></i>
+<h3>Clinical Decision Support</h3>
+<p>Provides early risk prediction to support clinicians.</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-laptop-code"></i>
+<h3>Technology</h3>
+<p>Python • Flask • Scikit-learn • HTML • CSS • JavaScript</p>
+</div>
+
+</div>
+
+<div class="warning">
+
+<h3>⚠ Medical Disclaimer</h3>
+
+<p>
+
+This application is intended only for educational and clinical
+decision-support purposes. It should never replace professional
+medical judgement or diagnosis.
+
+</p>
+
+</div>
+
+<div class="dev">
+
+<h2>👨‍💻 Developer</h2>
+
+<h3>Dhanish B.</h3>
+
+<p>B.Tech Biotechnology (AI Specialization)</p>
+
+<p>Karunya Institute of Technology and Sciences</p>
+
+<p><b>Email:</b> dhanish.b.bt@gmail.com</p>
+
+<p><b>GitHub:</b> https://github.com/dhanishb35</p>
+
+<p><b>LinkedIn:</b> linkedin.com/in/dhanishb27</p>
+
+</div>
+
+<footer>
+
+© 2026 SepsisSense • Developed by Dhanish B.
+
+</footer>
+
+</section>
+
+</body>
+</html>

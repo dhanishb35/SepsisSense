@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SepsisSense | Prediction</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<style>
+.predict-page{padding:130px 7% 70px;background:linear-gradient(180deg,#ffffff,#f8f7ff);}
+.page-title{text-align:center;margin-bottom:35px}
+.page-title h1{font-size:48px;color:#0F172A}
+.page-title p{color:#64748B;margin-top:10px}
+.form-card{background:#fff;border-radius:24px;padding:35px;box-shadow:0 15px 40px rgba(15,23,42,.08)}
+.section{margin-bottom:35px}
+.section h2{font-size:24px;color:#7C3AED;margin-bottom:20px;border-bottom:2px solid #F3E8FF;padding-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.field label{display:block;font-weight:600;margin-bottom:8px;color:#374151}
+.field input,.field select{width:100%;padding:14px;border:1px solid #D1D5DB;border-radius:12px;font-size:15px}
+.field input:focus,.field select:focus{outline:none;border-color:#7C3AED;box-shadow:0 0 0 3px rgba(124,58,237,.15)}
+.submit-wrap{text-align:center;margin-top:20px}
+.predict-btn{border:none;cursor:pointer;padding:18px 42px;border-radius:14px;background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;font-size:18px;font-weight:700;box-shadow:0 12px 30px rgba(124,58,237,.25)}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="logo">
+<i class="fa-solid fa-heart-pulse"></i>
+<span>SepsisSense</span>
+</div>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/predict">Prediction</a></li>
+<li><a href="#">About</a></li>
+</ul>
+</nav>
+
+<section class="predict-page">
+<div class="page-title">
+<h1>Patient Clinical Information</h1>
+<p>Enter the patient's clinical measurements to estimate the risk of sepsis.</p>
+</div>
+
+<div class="form-card">
+
+<div style="display:flex;gap:15px;justify-content:center;margin-bottom:30px;flex-wrap:wrap;">
+
+<button type="button" onclick="loadHealthy()" class="btn-primary">
+🟢 Load Healthy Patient (DEMO)
+</button>
+
+<button type="button" onclick="loadSeptic()" class="btn-primary">
+🔴 Load Septic Patient (DEMO)
+</button>
+
+</div>
+
+<form action="/predict" method="POST">
+
+<div class="section">
+<h2><i class="fa-solid fa-user"></i> Patient Information</h2>
+<div class="grid">
+<div class="field"><label>Age</label><input type="number" step="any" name="age" required></div>
+<div class="field"><label>Gender</label>
+<select name="gender">
+<option value="1">Male</option>
+<option value="0">Female</option>
+</select></div>
+<div class="field"><label>Unit 1</label><input type="number" name="unit1" required></div>
+<div class="field"><label>Unit 2</label><input type="number" name="unit2" required></div>
+<div class="field"><label>Hospital Admission Time</label><input type="number" step="any" name="hospadmtime" required></div>
+<div class="field"><label>ICU Length of Stay</label><input type="number" step="any" name="iculos" required></div>
+</div>
+</div>
+
+<div class="section">
+<h2><i class="fa-solid fa-heart-pulse"></i> Vital Signs</h2>
+<div class="grid">
+<div class="field"><label>HR</label><input type="number" step="any" name="hr" required></div>
+<div class="field"><label>O2Sat</label><input type="number" step="any" name="o2sat" required></div>
+<div class="field"><label>Temperature</label><input type="number" step="any" name="temp" required></div>
+<div class="field"><label>SBP</label><input type="number" step="any" name="sbp" required></div>
+<div class="field"><label>MAP</label><input type="number" step="any" name="map" required></div>
+<div class="field"><label>DBP</label><input type="number" step="any" name="dbp" required></div>
+<div class="field"><label>Respiratory Rate</label><input type="number" step="any" name="resp" required></div>
+</div></div>
+
+<div class="section">
+<h2><i class="fa-solid fa-flask"></i> Laboratory Parameters</h2>
+<div class="grid">
+<div class="field"><label>Base Excess</label><input type="number" step="any" name="baseexcess" required></div>
+<div class="field"><label>FiO2</label><input type="number" step="any" name="fio2" required></div>
+<div class="field"><label>pH</label><input type="number" step="any" name="ph" required></div>
+<div class="field"><label>PaCO2</label><input type="number" step="any" name="paco2" required></div>
+<div class="field"><label>Glucose</label><input type="number" step="any" name="glucose" required></div>
+<div class="field"><label>Potassium</label><input type="number" step="any" name="potassium" required></div>
+<div class="field"><label>Hematocrit</label><input type="number" step="any" name="hct" required></div>
+
+</div>
+</div>
+
+<div class="submit-wrap">
+<button type="submit" class="predict-btn">
+<i class="fa-solid fa-stethoscope"></i> Predict Sepsis Risk
+</button>
+</div>
+
+</form>
+</div>
+</section>
+
+<script>
+
+function loadHealthy(){
+
+document.getElementsByName("hr")[0].value=109;
+document.getElementsByName("o2sat")[0].value=100;
+document.getElementsByName("temp")[0].value=36.56;
+document.getElementsByName("sbp")[0].value=118;
+document.getElementsByName("map")[0].value=86;
+document.getElementsByName("dbp")[0].value=61;
+document.getElementsByName("resp")[0].value=18.5;
+
+document.getElementsByName("baseexcess")[0].value=-0.5;
+document.getElementsByName("fio2")[0].value=0.40;
+document.getElementsByName("ph")[0].value=7.36;
+document.getElementsByName("paco2")[0].value=43;
+document.getElementsByName("glucose")[0].value=117.5;
+document.getElementsByName("potassium")[0].value=4.0;
+document.getElementsByName("hct")[0].value=29.7;
+
+document.getElementsByName("age")[0].value=52.01;
+document.getElementsByName("gender")[0].value=1;
+document.getElementsByName("unit1")[0].value=1;
+document.getElementsByName("unit2")[0].value=0;
+document.getElementsByName("hospadmtime")[0].value=-0.03;
+document.getElementsByName("iculos")[0].value=3;
+
+}
+
+function loadSeptic(){
+
+document.getElementsByName("hr")[0].value=119;
+document.getElementsByName("o2sat")[0].value=100;
+document.getElementsByName("temp")[0].value=37.94;
+document.getElementsByName("sbp")[0].value=140;
+document.getElementsByName("map")[0].value=106;
+document.getElementsByName("dbp")[0].value=85;
+document.getElementsByName("resp")[0].value=26.5;
+
+document.getElementsByName("baseexcess")[0].value=-0.5;
+document.getElementsByName("fio2")[0].value=0.35;
+document.getElementsByName("ph")[0].value=7.36;
+document.getElementsByName("paco2")[0].value=43;
+document.getElementsByName("glucose")[0].value=117.5;
+document.getElementsByName("potassium")[0].value=4.0;
+document.getElementsByName("hct")[0].value=29.7;
+
+document.getElementsByName("age")[0].value=27.92;
+document.getElementsByName("gender")[0].value=1;
+document.getElementsByName("unit1")[0].value=1;
+document.getElementsByName("unit2")[0].value=0;
+document.getElementsByName("hospadmtime")[0].value=-0.03;
+document.getElementsByName("iculos")[0].value=249;
+
+}
+
+</script>
+
+</body>
+</html>
